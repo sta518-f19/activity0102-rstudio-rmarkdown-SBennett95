@@ -15,7 +15,8 @@ library(datasauRus)
 
 ### Exercise 1
 
-Based on the help file, the 
+Based on the help file, there are 1846 rows and 3 columns in the datasaurus_dozen file. The variables included in the data frame are "dataset", "x", and "y".
+
 ### Exercise 2
 
 (The answers for this Exercise are given for you below. But you should clean up some of the narrative so that it only includes what you want to turn in.)
@@ -36,6 +37,7 @@ And next calculate the correlation between `x` and `y` in this dataset:
 dino_data %>%
   summarize(r = cor(x, y))
 ```
+The correlation coefficient for the dino data r = -0.0645. This shows that there is a very weak negative relationship between x and y, so when x increases, y tends to decrease. Although again, this represents a very weaks relationship and shows that the two variables are hardly correlated at all.
 
 ### Exercise 3
 
