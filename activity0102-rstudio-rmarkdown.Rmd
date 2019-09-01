@@ -2,7 +2,10 @@
 title: "Activity 1.2 - RStudio and R Markdown"
 author: "Stephen Bennett"
 date: "8/29/2019"
-output: html_document
+output: 
+  html_document: 
+    fig_height: 8
+    fig_width: 8
 ---
 
 ### Load packages
@@ -43,6 +46,7 @@ The correlation coefficient for the dino data is r = -0.0645. This shows that th
 
 The correlation coefficient for the star data is r = -0.0630. This shows that there is a very weak negative relationship between x and y, so when x increases, y tends to decrease. Although again, this represents a very weaks relationship and shows that the two variables are hardly related at all. Compared with the correlation of the dino data set, this set has a slightly weaker linear relationship than that of the dino data although both are close to having no relationship whatsoever.
 
+Code to plot the data from the star data set
 ```{r plot-star}
 star_data <- datasaurus_dozen %>%
   filter(dataset == "star")
@@ -51,7 +55,7 @@ ggplot(data = star_data, mapping = aes(x = x, y = y)) +
   geom_point()
 ```
 
-I'm some text, you should replace me with more meaningful text...
+Here is code to find the correlation coefficient from the star data set.
 
 ```{r cor-star}
 star_data %>%
@@ -60,8 +64,9 @@ star_data %>%
 
 ### Exercise 4
 
-The correlation coefficient for the circle data is r = -0.0683. This shows that there is a very weak negative relationship between x and y, so when x increases, y tends to decrease. Although again, this represents a very weaks relationship and shows that the two variables are hardly related at all. Compared with the correlation of the dino data set, this set has a slightly stronger linear relationship than that of the dino data although both are close to having no relationship whatsoever.
+The correlation coefficient for the circle data is r = -0.0683. This shows that there is a very weak negative relationship between x and y, so when x increases, y tends to decrease. This represents a very weaks relationship and shows that the two variables are hardly related at all. Compared with the correlation of the dino data set, this set has a slightly stronger linear relationship than that of the dino data although both are close to having no relationship whatsoever.
 
+Code to plot the data from the star data set
 ```{r}
 circle_data <- datasaurus_dozen %>%
   filter(dataset == "circle")
@@ -70,6 +75,7 @@ ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
   geom_point()
 ```
 
+Here is code to find the correlation coefficient from the circle data set.
 ```{r}
 circle_data %>%
   summarize(r = cor(x, y))
@@ -77,4 +83,32 @@ circle_data %>%
 
 ### Exercise 5
 
-(Add code and narrative as needed. To add R chunks either type out the backticks, curly braces, and the letter `r` or use the Insert chunk button above, green C+.)
+Code using faceting to display all dataset plots at once.
+```{r}
+ggplot(data = datasaurus_dozen, aes(x = x, y = y, color = dataset)) + geom_point() + facet_wrap(~ dataset, ncol = 3) + theme(legend.position = "none")
+```
+
+Code to display all correlation coefficients at once.
+```{r}
+datasaurus_dozen %>%
+  group_by(dataset)
+  summarize(r = cor(x, y))
+  print(13)
+```
+
+The use of faceting to find all the correlations at once provided us with the following output, giving us the name of the dataset and its respective x and y correlation:
+ 1 away       -0.0641
+ 2 bullseye   -0.0686
+ 3 circle     -0.0683
+ 4 dino       -0.0645
+ 5 dots       -0.0603
+ 6 h_lines    -0.0617
+ 7 high_lines -0.0685
+ 8 slant_down -0.0690
+ 9 slant_up   -0.0686
+10 star       -0.0630
+11 v_lines    -0.0694
+12 wide_lines -0.0666
+13 x_shape    -0.0656
+
+We can see here that all correlation values are between -0.060 and -0.070, meaning that these datasets all have correlations that show an extremely weak negative linear relationship between x and y. The dataset "v_lines" has the strongest relationship, while the dataset "dots" has the weakest relationship. None of these datasets shows anything close to a significant linear relationship.
