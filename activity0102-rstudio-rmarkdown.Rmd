@@ -37,34 +37,42 @@ And next calculate the correlation between `x` and `y` in this dataset:
 dino_data %>%
   summarize(r = cor(x, y))
 ```
-The correlation coefficient for the dino data r = -0.0645. This shows that there is a very weak negative relationship between x and y, so when x increases, y tends to decrease. Although again, this represents a very weaks relationship and shows that the two variables are hardly correlated at all.
+The correlation coefficient for the dino data is r = -0.0645. This shows that there is a very weak negative relationship between x and y, so when x increases, y tends to decrease. Although again, this represents a very weaks relationship and shows that the two variables are hardly related at all.
 
 ### Exercise 3
 
-(Add code and narrative as needed. Note that the R chunks are labeled with `plot-star` and `cor-star` to provide spaces to place the code for plotting and calculating the correlation coefficient. To finish, clean up the narrative by removing these instructions.)
-
-Blah blah blah...
+The correlation coefficient for the star data is r = -0.0630. This shows that there is a very weak negative relationship between x and y, so when x increases, y tends to decrease. Although again, this represents a very weaks relationship and shows that the two variables are hardly related at all. Compared with the correlation of the dino data set, this set has a slightly weaker linear relationship than that of the dino data although both are close to having no relationship whatsoever.
 
 ```{r plot-star}
+star_data <- datasaurus_dozen %>%
+  filter(dataset == "star")
 
+ggplot(data = star_data, mapping = aes(x = x, y = y)) +
+  geom_point()
 ```
 
 I'm some text, you should replace me with more meaningful text...
 
 ```{r cor-star}
-
+star_data %>%
+  summarize(r = cor(x, y))
 ```
 
 ### Exercise 4
 
-(Add code and narrative as needed. Note that two R chunks are given but they are not labeled. Use the convention from above to name them appropriately.)
+The correlation coefficient for the circle data is r = -0.0683. This shows that there is a very weak negative relationship between x and y, so when x increases, y tends to decrease. Although again, this represents a very weaks relationship and shows that the two variables are hardly related at all. Compared with the correlation of the dino data set, this set has a slightly stronger linear relationship than that of the dino data although both are close to having no relationship whatsoever.
 
 ```{r}
+circle_data <- datasaurus_dozen %>%
+  filter(dataset == "circle")
 
+ggplot(data = circle_data, mapping = aes(x = x, y = y)) +
+  geom_point()
 ```
 
 ```{r}
-
+circle_data %>%
+  summarize(r = cor(x, y))
 ```
 
 ### Exercise 5
